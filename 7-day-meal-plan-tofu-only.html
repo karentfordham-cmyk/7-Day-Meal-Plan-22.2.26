@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>7‑Day High‑Protein Meal Plan (Tofu‑Only)</title>
+<style>
+  :root {
+    --bg: #0b1020;
+    --card: rgba(255,255,255,0.06);
+    --text: rgba(255,255,255,0.92);
+    --muted: rgba(255,255,255,0.68);
+    --line: rgba(255,255,255,0.12);
+    --accent: #41d17a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: radial-gradient(1200px 800px at 30% 0%, #14204b 0%, var(--bg) 55%);
+    color: var(--text);
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 20px 14px 40px; }
+  h1 { margin: 2px 0 6px; font-size: 22px; letter-spacing: 0.2px; }
+  .sub { margin: 0 0 16px; color: var(--muted); font-size: 13px; line-height: 1.35; }
+  .tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 12px 0 16px; }
+  .tabbtn {
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--text);
+    padding: 10px 10px;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .tabbtn[aria-selected="true"] {
+    border-color: rgba(65, 209, 122, 0.65);
+    background: linear-gradient(180deg, rgba(65,209,122,0.18), rgba(255,255,255,0.06));
+    box-shadow: 0 10px 26px rgba(0,0,0,0.25);
+  }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 14px;
+    margin: 0 0 14px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.22);
+  }
+  .dayhead { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+  .dayhead h2 { margin: 0; font-size: 16px; }
+  .tot { color: var(--accent); font-weight: 800; font-size: 13px; white-space: nowrap; }
+  .row { display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 9px 0; border-top: 1px dashed rgba(255,255,255,0.10); }
+  .row:first-of-type { border-top: none; }
+  .label { font-weight: 700; font-size: 13px; line-height: 1.25; }
+  .meta { color: var(--muted); font-size: 12px; margin-top: 2px; }
+  .kcal { font-size: 13px; color: rgba(255,255,255,0.86); white-space: nowrap; }
+  .kcal b { color: rgba(255,255,255,0.95); }
+  .hint {
+    margin: 10px 0 0;
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.10);
+    background: rgba(255,255,255,0.04);
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.35;
+  }
+  .shopitem { display: grid; grid-template-columns: 24px 1fr; gap: 10px; padding: 10px 0; border-top: 1px dashed rgba(255,255,255,0.10); }
+  .shopitem:first-of-type { border-top: none; }
+  input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent); margin-top: 3px; }
+  .shopname { font-weight: 750; font-size: 13px; }
+  .shopmeta { color: var(--muted); font-size: 12px; margin-top: 3px; line-height: 1.35; }
+  details { border: 1px solid var(--line); border-radius: 16px; background: var(--card); padding: 12px 12px; margin: 0 0 12px; }
+  summary { cursor: pointer; font-weight: 800; font-size: 14px; outline: none; }
+  .rmeta { color: var(--muted); font-size: 12px; margin: 6px 0 0; line-height: 1.35; }
+  .cols { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 10px; }
+  @media (min-width: 780px) { .cols { grid-template-columns: 1fr 1fr; } }
+  ul, ol { margin: 8px 0 0 18px; }
+  li { margin: 6px 0; }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.14);
+    background: rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.78);
+    margin-right: 6px;
+  }
+  .footer { color: var(--muted); font-size: 11px; margin-top: 14px; line-height: 1.45; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>7‑Day High‑Protein Meal Plan (Tofu‑Only)</h1>
+  <p class="sub">2 meals (lunch + dinner) and 2 snacks per day. Targets: ≤ <b>1,100 kcal</b> and ≥ <b>120 g protein</b> per day (estimates). Meals are designed for <b>&lt; 15 minutes</b> with repeatable prep. No tempeh used.</p>
+
+  <div class="tabs" role="tablist" aria-label="Meal plan tabs">
+    <button class="tabbtn" role="tab" id="tab-plan" aria-controls="panel-plan" aria-selected="true">Plan</button>
+    <button class="tabbtn" role="tab" id="tab-shop" aria-controls="panel-shop" aria-selected="false">Shopping List</button>
+    <button class="tabbtn" role="tab" id="tab-recipes" aria-controls="panel-recipes" aria-selected="false">Recipes</button>
+  </div>
+
+  <section id="panel-plan" class="panel active" role="tabpanel" aria-labelledby="tab-plan"></section>
+  <section id="panel-shop" class="panel" role="tabpanel" aria-labelledby="tab-shop"></section>
+  <section id="panel-recipes" class="panel" role="tabpanel" aria-labelledby="tab-recipes"></section>
+
+  <div class="footer">
+    Nutrition figures are estimates based on typical values and the labels visible in your photos. If your tofu brand differs materially, treat calories/protein as directional and adjust portions.
+    Egg is not used as a main ingredient (and not used in these meals).
+  </div>
+</div>
+
+<script>
+const DATA = {"items": {"Meal A": {"name": "Garlic–Soy Tofu, Kale & Mushroom Stir‑Fry", "kcal": 312, "protein": 31.8}, "Meal B": {"name": "Tofu Tomato–Spinach Skillet (Quick ‘Shakshuka‑Style’, no eggs)", "kcal": 338, "protein": 33.2}, "Meal C": {"name": "Black Bean & Spinach Tofu Bowl", "kcal": 333, "protein": 31.4}, "Snack 1": {"name": "Mango Jelly Protein ‘Cheesecake’ Cup", "kcal": 225, "protein": 31.3}, "Snack 2": {"name": "Microwave Chocolate Protein Brownie Mug + Wicked Sister Ganache", "kcal": 200, "protein": 28.3}}, "plan": [{"day": "Day 1", "lunch": "Meal A", "snack1": "Snack 1", "dinner": "Meal B", "snack2": "Snack 2"}, {"day": "Day 2", "lunch": "Meal C", "snack1": "Snack 1", "dinner": "Meal B", "snack2": "Snack 2"}, {"day": "Day 3", "lunch": "Meal A", "snack1": "Snack 1", "dinner": "Meal C", "snack2": "Snack 2"}, {"day": "Day 4", "lunch": "Meal B", "snack1": "Snack 1", "dinner": "Meal A", "snack2": "Snack 2"}, {"day": "Day 5", "lunch": "Meal C", "snack1": "Snack 1", "dinner": "Meal A", "snack2": "Snack 2"}, {"day": "Day 6", "lunch": "Meal B", "snack1": "Snack 1", "dinner": "Meal C", "snack2": "Snack 2"}, {"day": "Day 7", "lunch": "Meal A", "snack1": "Snack 1", "dinner": "Meal B", "snack2": "Snack 2"}], "shopping": [{"item": "Tofu (firm)", "qty": "2.45 kg (round up to your pack sizes)", "note": "Used in Meals A, B and C"}, {"item": "High‑protein plain yoghurt (Woolworths)", "qty": "1.4 kg (≈ 7 × 200 g serves)", "note": "Snack 1"}, {"item": "Nature’s Way plant protein – Vanilla", "qty": "123 g (≈ 3.5 half‑scoops)", "note": "Snack 1 (½ scoop per serve)"}, {"item": "Nature’s Way plant protein – Chocolate", "qty": "245 g (≈ 7 scoops)", "note": "Snack 2 (1 scoop per serve)"}, {"item": "Wicked Sister high‑protein pudding (choc or banana)", "qty": "280 g (≈ 7 × 40 g toppings)", "note": "Snack 2 ganache topping"}, {"item": "Jelly Lite (Mango/Passionfruit)", "qty": "1 box (make 1 L; use ~700 g)", "note": "Snack 1"}, {"item": "Frozen mixed berries", "qty": "350 g (≈ 7 × 50 g)", "note": "Snack 1"}, {"item": "Mushrooms", "qty": "500 g", "note": "Meal A"}, {"item": "Kale", "qty": "300 g", "note": "Meal A"}, {"item": "Spinach", "qty": "640 g", "note": "Meals B & C"}, {"item": "Canned diced tomatoes", "qty": "850 g (≈ 3 cans depending on size)", "note": "Meal B"}, {"item": "Canned black beans", "qty": "320 g drained (≈ 4 cans depending on drain wt.)", "note": "Meal C"}, {"item": "Soy sauce", "qty": "9 tbsp (≈ 135 mL)", "note": "Meals A & C"}, {"item": "Minced garlic", "qty": "14 tsp", "note": "Meals A, B & C"}, {"item": "Stock powder", "qty": "5 tsp", "note": "Meal B"}, {"item": "Plain flour", "qty": "35 g (≈ 7 tsp)", "note": "Snack 2"}, {"item": "Baking powder", "qty": "~3.5 tsp", "note": "Snack 2"}], "recipes": [{"key": "Meal A", "title": "Garlic–Soy Tofu, Kale & Mushroom Stir‑Fry", "time": "10–12 min", "serves": "1", "macros": "312 kcal • 31.8 g protein", "ingredients": ["Firm tofu – 170 g, diced", "Mushrooms – 100 g, sliced", "Kale – 60 g, torn", "Soy sauce – 1 tbsp", "Minced garlic – 1 tsp", "Water – 2–3 tbsp (steam‑fry; no oil)"], "method": ["Heat a non‑stick pan on medium‑high. Add tofu + water. Cook 3–4 min, turning, until edges are lightly golden.", "Add mushrooms + garlic. Cook 3 min until mushrooms soften.", "Add kale + soy sauce. Toss 1–2 min until kale just wilts. Serve."], "notes": ["Optional (if you have calories spare): 1 tsp pesto stirred through at the end."]}, {"key": "Meal B", "title": "Tofu Tomato–Spinach Skillet (Quick ‘Shakshuka‑Style’, no eggs)", "time": "10–12 min", "serves": "1", "macros": "338 kcal • 33.2 g protein", "ingredients": ["Firm tofu – 200 g, crumbled or diced", "Canned diced tomatoes – 170 g (≈ 1/2 can)", "Spinach – 80 g", "Minced garlic – 1 tsp", "Stock powder – 1 tsp", "Water – 2–3 tbsp (as needed)"], "method": ["Heat a non‑stick pan on medium‑high. Add tofu + garlic + 2 tbsp water. Cook 3–4 min, breaking up tofu.", "Add tomatoes + stock powder. Simmer 3–4 min until slightly thick.", "Stir through spinach for 1–2 min until wilted. Serve."], "notes": ["If you want more flavour: add 1 tbsp pizza sauce (adds calories)."]}, {"key": "Meal C", "title": "Black Bean & Spinach Tofu Bowl", "time": "10–12 min", "serves": "1", "macros": "333 kcal • 31.4 g protein", "ingredients": ["Firm tofu – 150 g, diced", "Black beans (drained) – 80 g", "Spinach – 60 g", "Soy sauce – 1 tbsp", "Minced garlic – 1 tsp", "Water – 2–3 tbsp"], "method": ["Heat a non‑stick pan on medium‑high. Add tofu + water. Cook 3–4 min, turning.", "Add garlic + beans + soy sauce. Cook 2–3 min.", "Add spinach and toss 1–2 min until wilted. Serve."], "notes": ["Optional crunch: shredded red cabbage on the side (minimal calories)."]}, {"key": "Snack 1", "title": "Mango Jelly Protein ‘Cheesecake’ Cup", "time": "5 min prep (+ chill)", "serves": "1", "macros": "225 kcal • 31.3 g protein", "ingredients": ["High‑protein plain yoghurt – 200 g", "Vanilla protein powder – 1/2 scoop (17.5 g)", "Jelly Lite (mango/passionfruit) – ~100 g prepared", "Frozen mixed berries – 50 g"], "method": ["Make Jelly Lite once for the week and chill until set.", "Mix yoghurt + protein powder until smooth.", "Layer in a cup: yoghurt mix → jelly → berries. Eat immediately or keep chilled."], "notes": ["If you want it sweeter: add a pinch of Raw Earth sweetener."]}, {"key": "Snack 2", "title": "Microwave Chocolate Protein Brownie Mug + Wicked Sister Ganache", "time": "3–5 min", "serves": "1", "macros": "200 kcal • 28.3 g protein", "ingredients": ["Chocolate protein powder – 1 scoop (35 g)", "Plain flour – 1 tsp (5 g)", "Baking powder – 1/2 tsp", "Water (or a splash of milk) – ~60 mL", "Wicked Sister high‑protein pudding – 40 g (as ganache)"], "method": ["In a mug, mix protein powder + flour + baking powder.", "Add water gradually and stir to a thick batter.", "Microwave 45–60 seconds (watch it rise). Rest 30 seconds.", "Top with Wicked Sister pudding for a thick ‘ganache’ feel."], "notes": ["To thicken the ganache more: stir 1–2 tsp extra protein powder into the pudding before topping."]}]};
+
+function itemLine(key) {
+  const it = DATA.items[key];
+  return `
+    <div class="row">
+      <div>
+        <div class="label">${it.name}</div>
+        <div class="meta">${key}</div>
+      </div>
+      <div class="kcal"><b>${it.kcal}</b> kcal • <b>${it.protein.toFixed(1)}</b> g</div>
+    </div>`;
+}
+
+function renderPlan() {
+  const host = document.getElementById('panel-plan');
+  host.innerHTML = '';
+  DATA.plan.forEach(d => {
+    const lunch = DATA.items[d.lunch];
+    const dinner = DATA.items[d.dinner];
+    const s1 = DATA.items[d.snack1];
+    const s2 = DATA.items[d.snack2];
+    const totalK = lunch.kcal + dinner.kcal + s1.kcal + s2.kcal;
+    const totalP = lunch.protein + dinner.protein + s1.protein + s2.protein;
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="dayhead">
+        <h2>${d.day}</h2>
+        <div class="tot">${Math.round(totalK)} kcal • ${totalP.toFixed(1)} g protein</div>
+      </div>
+      ${itemLine(d.lunch)}
+      ${itemLine(d.snack1)}
+      ${itemLine(d.dinner)}
+      ${itemLine(d.snack2)}
+      <div class="hint">
+        Portion guide (per serve): Meal A uses ~170 g tofu; Meal B uses ~200 g tofu; Meal C uses ~150 g tofu + 80 g drained black beans.
+        Snack 1 is a yoghurt “cheesecake” cup; Snack 2 is a brownie‑mug with a thick pudding “ganache” topping.
+      </div>
+    `;
+    host.appendChild(card);
+  });
+}
+
+function renderShopping() {
+  const host = document.getElementById('panel-shop');
+  const key = 'mealplan_shop_ticks_v2';
+  const saved = JSON.parse(localStorage.getItem(key) || '{}');
+
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <div class="dayhead">
+      <h2>Shopping List (weekly quantities)</h2>
+      <div class="tot">Tap to tick off</div>
+    </div>
+    <div class="hint">This list shows the total quantities required for the week based on the plan. If you already have enough of an item, tick it off and ignore.</div>
+  `;
+
+  DATA.shopping.forEach((s, idx) => {
+    const id = 'shop_' + idx;
+    const checked = !!saved[id];
+    const row = document.createElement('div');
+    row.className = 'shopitem';
+    row.innerHTML = `
+      <input type="checkbox" id="${id}" ${checked ? 'checked' : ''} />
+      <div>
+        <div class="shopname">${s.item}</div>
+        <div class="shopmeta"><b>${s.qty}</b><br/>${s.note || ''}</div>
+      </div>
+    `;
+    row.querySelector('input').addEventListener('change', (e) => {
+      saved[id] = e.target.checked;
+      localStorage.setItem(key, JSON.stringify(saved));
+    });
+    card.appendChild(row);
+  });
+
+  host.innerHTML = '';
+  host.appendChild(card);
+}
+
+function renderRecipes() {
+  const host = document.getElementById('panel-recipes');
+  host.innerHTML = '';
+  const intro = document.createElement('div');
+  intro.className = 'card';
+  intro.innerHTML = `
+    <div class="dayhead">
+      <h2>Recipes</h2>
+      <div class="tot">Fast + repeatable</div>
+    </div>
+    <div class="hint">Speed tip: prep Jelly Lite once, and pre‑dice tofu into containers for 2–3 days at a time.</div>
+  `;
+  host.appendChild(intro);
+
+  DATA.recipes.forEach(r => {
+    const det = document.createElement('details');
+    det.innerHTML = `
+      <summary>${r.title}</summary>
+      <div class="rmeta">
+        <span class="tag">${r.key}</span>
+        <span class="tag">${r.time}</span>
+        <span class="tag">Serves: ${r.serves}</span>
+        <span class="tag">${r.macros}</span>
+      </div>
+      <div class="cols">
+        <div>
+          <b>Ingredients</b>
+          <ul>${r.ingredients.map(x => `<li>${x}</li>`).join('')}</ul>
+        </div>
+        <div>
+          <b>Method</b>
+          <ol>${r.method.map(x => `<li>${x}</li>`).join('')}</ol>
+        </div>
+      </div>
+      ${(r.notes && r.notes.length) ? `<div class="hint"><b>Notes:</b><br/>${r.notes.join('<br/>')}</div>` : ''}
+    `;
+    host.appendChild(det);
+  });
+}
+
+function setTab(which) {
+  const map = {
+    plan: ['tab-plan','panel-plan'],
+    shop: ['tab-shop','panel-shop'],
+    recipes: ['tab-recipes','panel-recipes']
+  };
+  Object.keys(map).forEach(k => {
+    const [tid, pid] = map[k];
+    const btn = document.getElementById(tid);
+    const pnl = document.getElementById(pid);
+    const active = (k === which);
+    btn.setAttribute('aria-selected', active ? 'true' : 'false');
+    pnl.classList.toggle('active', active);
+  });
+}
+
+document.getElementById('tab-plan').addEventListener('click', () => setTab('plan'));
+document.getElementById('tab-shop').addEventListener('click', () => setTab('shop'));
+document.getElementById('tab-recipes').addEventListener('click', () => setTab('recipes'));
+
+renderPlan();
+renderShopping();
+renderRecipes();
+</script>
+</body>
+</html>
